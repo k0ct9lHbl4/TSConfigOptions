@@ -1,0 +1,6 @@
+dist
+/configExamples/babelTranspilingTscTypes/build
+/configExamples/tscTranspilingAndTypes/build
+node_modules
+.idea
+.DS_Store

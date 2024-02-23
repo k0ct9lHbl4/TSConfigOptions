@@ -1,0 +1,13 @@
+{
+  // Параметры компилятора
+  "compilerOptions": {},
+
+  // Какие файлы попадают в процесс компиляции, транспиляции, какие файлы type check-ает TS
+  "include": ["./src", "./some-dir/**/*.ts"],
+
+  // Какие файлы нужно исключить из компиляции, транспиляции, type check-а TS
+  "exclude": ["node_modules", "exclude_me"],
+
+  // Наследование конфигов
+  "extends": ["./tsconfig.base.json"]
+}

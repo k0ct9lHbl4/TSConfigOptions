@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES5", // В какую версию компилировать
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"], // Описываем runtime среду
+    "jsx": "react-jsx", // Для поддержки jsx
+
+    /* Modules */
+    "module": "ESNext", // Чтобы можно было использовать import/export и не было ограничений по фичам
+    "moduleResolution": "node", // Для резолва index файлов
+    "resolveJsonModule": true, // Чтобы импортировать JSON модули с типизацией
+    // Настройка алиасов
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* Emit */
+    "outDir": "./dist/", // Куда складывать emit проекта
+    "removeComments": true, // Удаляет все комменты при конвертации в JS
+    "downlevelIteration": true, // Позволяет более точно итерироваться в ES5, если есть Symbol.iterator
+    "noEmitOnError": true, // Не продолжать компиляцию при ошибке
+
+    /* Interop Constraints */
+    "isolatedModules": true, // Транспилирует каждый файл как изолированный модуль (ускоряет компиляцию)
+    "esModuleInterop": true, // Позволяет работать с пакетами, которые используют commonJS/AMD/UMD как с обычными
+    "allowSyntheticDefaultImports": true, // Для работы импорта файла, у которого явно не указан export default
+    "forceConsistentCasingInFileNames": true, // На один модуль должен быть референс в одном кейсе
+
+    /* Type Checking */
+    "strict": true, // Включаем более точный type checking
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    /* Completeness */
+    "skipLibCheck": true // Пропускает TS проверку для библиотек
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}

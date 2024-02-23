@@ -1,0 +1,286 @@
+{
+  "compilerOptions": {
+    //======================================//
+    //*------------- Projects -------------*//
+    //======================================//
+
+    /* Они не нужны, если у нас нету нескольких папок с разными tsconfig (Project References) */
+
+    // Сохраняет информацию о project graph из последней компиляции
+    "incremental": true,                                   /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
+    "composite": true,                                     /* Enable constraints that allow a TypeScript project to be used with project references. */
+    "tsBuildInfoFile": "./.tsbuildinfo",                   /* Specify the path to .tsbuildinfo incremental compilation file. */
+    "disableSourceOfProjectReferenceRedirect": true,       /* Disable preferring source files instead of declaration files when referencing composite projects. */
+    "disableSolutionSearching": true,                      /* Opt a project out of multi-project reference checking when editing. */
+    "disableReferencedProjectLoad": true,                  /* Reduce the number of projects loaded automatically by TypeScript. */
+
+    //======================================//
+    //*----- Language and Environment -----*//
+    //======================================//
+
+    // В какую версию JS компилировать проект.
+    // Если хотим, чтобы поддерживались все фичи и TS не транспилировал код, то пишем ESNext
+    // ESNext для перевода TS в JS, а для транспиляции можно использовать babel
+    "target": "ES2016",
+
+    // То, какие дефолтные файлы подключать с TS, чтобы описать runtime среду.
+    // Например, если зайдем в type definition объекта window, то перекинет на папку lib.dom.ts
+    // То есть если пишем на Node, то будет странно видеть типизацию для window
+    // ESNext - дополнительные api, доступные в ESNext
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"],
+
+    // То, какой JSX код генерируется.
+    "jsx": "react",
+
+    // Для конфигурации JSX. Например, если используем JSX во Vue или у нас свой фреймворк
+    // Может быть полезно только в этих случаях, т.к. по дефолту TS поддерживает JSX под React
+    "jsxFactory": "",                                      /* Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'. */
+    "jsxFragmentFactory": "",                              /* Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'. */
+    "jsxImportSource": "",                                 /* Specify module specifier used to import the JSX factory functions when using 'jsx: react-jsx*'. */
+    "reactNamespace": "",                                  /* Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit. */
+
+    // Поддержка декораторов в TS коде
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,                         /* Emit design-type metadata for decorated declarations in source files. */
+
+    // Если в проекте есть type definitions, например, @types/react или дефолтные, например, lib.d.ts, ...
+    // ... то они по дефолту подключаются в проект. А если "noLib": true, то не подключаются и игнорируется lib: [...]
+    "noLib": true,
+
+    // Отвечает за то, как классы будут транспилироваться в старый код
+    "useDefineForClassFields": true,                       /* Emit ECMAScript-standard-compliant class fields. */
+
+    // По какому алгоритму TS понимает тип модуля
+    "moduleDetection": "auto",                             /* Control what method is used to detect module-format JS files. */
+
+    //======================================//
+    //*------------- Modules --------------*//
+    //======================================//
+
+    // Модульная система. ES5, ES6, ESNext поддерживают import, export. ESNext поддерживает дополнительный синтаксис
+    "module": "ES2015",
+
+    // Рутовая папка директории
+    "rootDir": "./",                                       /* Specify the root folder within your source files. */
+
+    // Как происходит resolve модулей
+    // classic - index файлы сами по себе не резолвятся из папки
+    // node - то, как работает в node (резолвятся)
+    "moduleResolution": "node",                            /* Specify how TypeScript looks up a file from a given module specifier. */
+
+    // Абсолютные импорты будут писаться от этого пути
+    "baseUrl": "./",                                       /* Specify the base directory to resolve non-relative module names. */
+
+    // Для настройки алиасов
+    "paths": {                                             /* Specify a set of entries that re-map imports to additional lookup locations. */
+      "@utils": ["./src/utils"]
+    },
+
+    // Сообщить компилятору о нескольких каталогов, действующих как один корень.
+    // Это позволяет разрешать импорты, будто модули объединены в один каталог
+    "rootDirs": [],                                        /* Allow multiple folders to be treated as one when resolving modules. */
+
+    // По умолчанию все @types включены в компиляцию.
+    // Если указать typeRoots, то будут включены указанные пакеты
+    "typeRoots": [],                                       /* Specify multiple folders that act like './node_modules/@types'. */
+
+    // По умолчанию все @types включены в компиляцию.
+    // Если указать, то в global scope будут включены только указанные пакеты
+    "types": [],                                           /* Specify type package names to be included without being referenced in a source file. */
+
+    // Используем, например, когда мы знаем, что
+    // конкретная библиотека всегда будет доступна во время выполнения,
+    // но вы не можете получить к ней доступ при импорте.
+    "allowUmdGlobalAccess": true,                          /* Allow accessing UMD globals from modules. */
+
+    // Чтобы переопределить список суффиксов имен файлов по умолчанию для поиска при резолве модуля.
+    // Если [".service", ".types", ""], то при
+    // import foo from "./foo" TS будет искать файлы foo.service.ts, foo.types.ts, foo.ts
+    "moduleSuffixes": [],                                  /* List of file name suffixes to search when resolving a module. */
+
+    // Чтобы импортировать JSON модули в JS и TS код с типизацией и TS не будет ругаться на импорты
+    "resolveJsonModule": true,
+
+    // Запрещает import, require, которые увеличат количество файлов в итоговой сборке
+    "noResolve": true,                                     /* Disallow 'import's, 'require's or '<reference>'s from expanding the number of files TypeScript should add to a project. */
+
+    //======================================//
+    //*-------- JavaScript Support --------*//
+    //======================================//
+
+    // Позволяет TS импортировать JS файлы
+    // Лучше false, если проект не в переходном периоде
+    "allowJs": true,                                       /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */
+
+    // Будет type checking в JS файлах, насколько TS это может сделать (работает плохо)
+    "checkJs": true,                                       /* Enable error reporting in type-checked JavaScript files. */
+
+    // Если включены опции выше, то указывает,
+    // насколько глубоко TS будет рыться внутри node_modules для генерации типизации
+    "maxNodeModuleJsDepth": 1,                             /* Specify the maximum folder depth used for checking JavaScript files from 'node_modules'. Only applicable with 'allowJs'. */
+
+    //======================================//
+    //*--------------- Emit ---------------*//
+    //======================================//
+
+    // Для генерации d.ts файлов, что нужно для библиотек
+    "declaration": true,                                   /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
+
+    // Source map для d.ts файлов, которая сопоставляется с исходным файлов .ts
+    // Это позволит VSCode обращаться к исходному файлу .ts при использовании функции Go to Definition
+    "declarationMap": true,                                /* Create sourcemaps for d.ts files. */
+
+    // Для генерации только d.ts файлов. Полезно, если
+    // - Используется транспилятор, отличный от TS
+    // - TS используется только для создания d.ts файлов
+    "emitDeclarationOnly": true,                           /* Only output d.ts files and not JavaScript files. */
+
+    // Создавать source map или нет
+    "sourceMap": true,                                     /* Create source map files for emitted JavaScript files. */
+
+    // Все глобальные (немодульные) файлы будут объединены в один указанный файл
+    "outFile": "./",                                       /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
+
+    // В какую директорию складывать build проекта
+    "outDir": "./",                                        /* Specify an output folder for all emitted files. */
+
+    // Удаляет все комменты при конвертации в JS
+    "removeComments": true,                                /* Disable emitting comments. */
+
+    // Не создавать файлы компиляции в JS, не создавать source map и declarations
+    // Например, npx tsc --noEmit --project ./tsconfig.json только для type checking-a
+    // Это освобождает место для Babel или SWC для преобразования в файл, работающий в JS
+    "noEmit": true,                                        /* Disable emitting files from a compilation. */
+
+    // Чтобы различные helper-ы импортировались из tslib
+    // Полезно для уменьшения размера бандла с помощью утилит из библиотеки tslib, помогающих транспилировать код
+    "importHelpers": true,                                 /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
+
+    // Для удаления импортов, которые не используются (не type импорты)
+    "importsNotUsedAsValues": "remove",                    /* Specify emit/checking behavior for imports that are only used for types. */
+
+    // Позволяет более точно итерироваться в ES5, если есть Symbol.iterator (использовать spread, rest операторы)
+    // Пример - spread Set-a в массив - будет ошибка без этого параметра
+    "downlevelIteration": true,                            /* Emit more compliant, but verbose and less performant JavaScript for iteration. */
+
+    // Для debugger, чтобы подменять source, где они находятся на самом деле
+    "sourceRoot": "",                                      /* Specify the root path for debuggers to find the reference source code. */
+    "mapRoot": "",                                         /* Specify the location where debugger should locate map files instead of generated locations. */
+
+    // Добавляет source map в каждый .js файл вместо записи в .map.js при emit-e
+    "inlineSourceMap": true,                               /* Include sourcemap files inside the emitted JavaScript. */
+
+    // Добавляет исходный код в source map при emit-e
+    "inlineSources": true,                                 /* Include source code in the sourcemaps inside the emitted JavaScript. */
+
+    // Лучше оставить по умолчанию в false
+    "emitBOM": false,                                      /* Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files. */
+
+    // Какой конец строки будет использоваться при emit-e
+    "newLine": "crlf",                                     /* Set the newline character for emitting files. */
+
+    // При использовании @internal в js-doc его не будет видно в типизации
+    "stripInternal": true,
+
+    // Отключает создание helpers типа __extends
+    "noEmitHelpers": true,
+
+    // Если произошла ошибка при компиляции, то не нужно продолжать компиляцию
+    "noEmitOnError": true,
+
+    // Не пропадут const enums в emit кода (по дефолту превращаются в строки и декларация enum не остается)
+    "preserveConstEnums": true,
+
+    // Куда будут складываться d.ts файлы
+    "declarationDir": "./",
+
+    // Если есть неиспользуемый value импорт, то он останется
+    "preserveValueImports": true,
+
+    //======================================//
+    //*-------- Interop Constraints -------*//
+    //======================================//
+
+    // Транспилирует каждый файл как изолированный модуль
+    // Будет ошибка, если код нельзя транспилировать файл изолировано (небольшие ограничения)
+    // IMPORTANT! Очень сильно ускоряет процесс компиляции
+    "isolatedModules": true,
+
+    // Для работы импорта файла, у которого явно не указан export default
+    // Не надо будет писать import * as React from "react"
+    "allowSyntheticDefaultImports": true,
+
+    // Позволяет работать с пакетами, которые используют commonJS (module.exports и require) или AMD/UMD,
+    // как с обычными пакетами (import ... from ...)
+    "esModuleInterop": true,
+
+    // Если в symlink есть файлы и есть relative импорты,
+    // то они будут резолвиться относительно файла symlink,
+    // а не относительно оригинальной директории, на которую symlink ссылается
+    // (Лучше не использовать и не ставить в true, т.к. npm link не будет нормально работать)
+    "preserveSymlinks": true,
+
+    // На один модуль должен быть референс в одном кейсе
+    // Полезно в не case-sensitive ОС, таких как windows и mac
+    "forceConsistentCasingInFileNames": true,
+
+    //======================================//
+    //*----------- Type Checking ----------*//
+    //======================================//
+
+    // Включает сразу много опций
+    "strict": true,
+    // - alwaysStrict - Добавляет 'use strict'
+    // - noImplicitAny - Ругается на неявное any
+    // - noImplicitThis - Ругается на неявный this (если this используется в функции вне контексте объекта)
+    // - strictBindCallApply - Строгая типизация bind, call, apply
+    // - strictFunctionTypes - Более точная проверка типов аргументов функций
+    // - strictNullChecks - Строгая проверка на null (по умолчанию нормально тип на null и undefined не проверяет)
+    // - strictPropertyInitialization - Все свойства класса должны быть декларированы
+    // - useUnknownInCatchVariables - Чтобы в catch типизация error была unknown
+
+    // Будет ругаться на is declared but its value is never read в переменных
+    "noUnusedLocals": true,
+
+    // Ругается на is declared but its value is never read в аргументах функции (можно написать _argument)
+    "noUnusedParameters": true,
+
+    // Ругается если передаем undefined в key?: number
+    "exactOptionalPropertyTypes": true,
+
+    // Функция явно должна что-то возвращать (в каждом блоке return) либо ничего не возвращать (не писать return)
+    "noImplicitReturns": true,
+
+    // Следит, чтобы в switch case в каждом case был break или return
+    "noFallthroughCasesInSwitch": true,
+
+    // Хорошее свойство, примеры:
+    // - Если достаем значение obj.key из Record<string, string>, то оно будет string | undefined
+    // - Если достаем элемент arr[n] из string[], то оно будет string | undefined
+    "noUncheckedIndexedAccess": true,
+
+    // Нужно использовать override, если изменяем какое-либо поле parent класса в child классе
+    "noImplicitOverride": true,
+
+    // Если у нас Record<string, string>, то нужно писать obj["key"] вместо obj.key
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Ругается на неиспользуемые label в цикле
+    "allowUnusedLabels": false,
+
+    // Ругается на недостижимый код (например, на код после return)
+    "allowUnreachableCode": false,
+
+    //======================================//
+    //*----------- Completeness -----------*//
+    //======================================//
+
+    // Пропускает проверку default .d.ts файлов (lib.dom.d.ts etc.)
+    // Эта проверка не нужна
+    "skipDefaultLibCheck": true,
+
+    // Новым версиям TS бывает что-то не нравится в d.ts библиотек в node_modules
+    // Поэтому включаем (покрывает опцию skipDefaultLibCheck)
+    "skipLibCheck": true
+  }
+}
