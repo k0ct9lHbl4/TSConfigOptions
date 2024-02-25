@@ -41,6 +41,8 @@
     /* Completeness */
     "skipLibCheck": true // Пропускает TS проверку для библиотек
   },
+  "include": ["./src"],
+  "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
